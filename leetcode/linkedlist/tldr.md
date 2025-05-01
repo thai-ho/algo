@@ -2,6 +2,23 @@
 
 This directory contains solutions to various linked list problems from LeetCode. Below you'll find details about each problem, the approach used to solve it, and an explanation of the solution.
 
+Before diving into problems, you are need to know the basis of Linked List.
+A linked list is a linear data structure contains:
+
+- Data (the value stored)
+- A reference/pointer to the next value
+  The last node typically points to `null`, indicating the end of the list.
+
+```javascript
+// Basic structure of a linked list node in JavaScript
+class ListNode {
+  constructor(val = 0, next = null) {
+    this.val = val;
+    this.next = next;
+  }
+}
+```
+
 ## Problems Overview
 
 1. [Delete Node in a Linked List](#delete-node-in-a-linked-list)
@@ -36,7 +53,7 @@ When approaching linked list problems, remember to:
 **Solution**:
 
 ```javascript
-var deleteNode = function(node) {
+var deleteNode = function (node) {
   node.val = node.next.val;
   node.next = node.next.next;
 };

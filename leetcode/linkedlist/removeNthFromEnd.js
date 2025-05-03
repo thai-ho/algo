@@ -12,30 +12,31 @@
  */
 
 var removeNthFromEnd = function (head, n) {
+  // Init listnode
   const dummy = new ListNode(0);
   dummy.next = head;
   
   let fast = dummy;
   let slow = dummy;
   
-  // Move fast pointer n+1 steps ahead
-  // The +1 is because we want slow to end up at the node BEFORE the one to remove
+  // Move fast to n, +1 để move tới node có khoảng cách so với slow bằng n
   for (let i = 0; i <= n; i++) {
     fast = fast.next;
     
-    // If fast is null before completing the loop, n is too large
+    // case này để ràng buộc n === null => end của list
+    // hoặc n quá lớn, lớn hơn list length thì return head
     if (i < n && !fast) return head; // This is an edge case check
   }
   
-  // Move both pointers until fast reaches the end
+  // chạy fast và slow
   while (fast) {
     fast = fast.next;
     slow = slow.next;
   }
   
-  // Remove the nth node from the end
+  // fast dừng, xoá node tiếp theo của slow
   slow.next = slow.next.next;
   
-  // Return the new head
+  // Return head mới
   return dummy.next;
 };

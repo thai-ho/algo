@@ -59,6 +59,7 @@ function findNode(head, target) {
 
 1. [Delete Node in a Linked List](#delete-node-in-a-linked-list)
 2. [Remove Nth Node From End of List](#remove-nth-node-from-end-of-list)
+3. [Reverse List](#reverse-list)
 
 ## Delete Node in a Linked List
 
@@ -150,36 +151,92 @@ var removeNthFromEnd = function (head, n) {
   // Init listnode
   const dummy = new ListNode(0);
   dummy.next = head;
-  
+
   let fast = dummy;
   let slow = dummy;
-  
+
   // Move fast to n, +1 để move tới node có khoảng cách so với slow bằng n
   for (let i = 0; i <= n; i++) {
     fast = fast.next;
-    
+
     // case này để ràng buộc n === null => end của list
     // hoặc n quá lớn, lớn hơn list length thì return head
     if (i < n && !fast) return head; // This is an edge case check
   }
-  
+
   // chạy fast và slow
   while (fast) {
     fast = fast.next;
     slow = slow.next;
   }
-  
+
   // fast dừng, xoá node tiếp theo của slow
   slow.next = slow.next.next;
-  
+
   // Return head mới
   return dummy.next;
 };
 ```
 
 **Complexity**:
+
 - Time: O(L) where L is the length of the linked list - We traverse at most twice through the list (once to move fast pointer ahead, and once to move both pointers)
 - Space: O(1) - We only use a fixed amount of extra space (dummy node and two pointers)
+
+## Reverse list
+
+**Problem**:
+Đảo chiều list
+
+**Example**:
+
+- Input: head = `1->2->3->4->5` → Output: `5->4->3->2->1`
+
+**Approach**:
+Khởi tạo 2 prop: `prev` vs `current`. Chạy current và dùng `prev` để assign từng giá trị.
+
+Technique tạm gọi là: Đảo ngược tuần tự
+
+Visualize trước khi xuống phần solutions:
+
+```
+Iteration 1:
+1. Store next: next = current.next = 2 -> 3 -> 4 -> null
+2. Reverse pointer: current.next = prev = null
+3. Move prev: prev = current = 1 -> null
+4. Move current: current = next = 2 -> 3 -> 4 -> null
+
+After iteration:
+prev = 1 -> null
+current = 2 -> 3 -> 4 -> null
+```
+
+**Solution**:
+
+```javascript
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function (head) {
+  let prev = null;
+  let current = head;
+
+  while (current !== null) {
+    const next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+  }
+
+  return prev;
+};
+```
+
+**Complexity**:
+
+- Time: O(n)
+- Space: O(1)
 
 ## General Strat
 

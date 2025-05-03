@@ -235,8 +235,8 @@ var reverseList = function (head) {
 
 **Complexity**:
 
-- Time: O(n)
-- Space: O(1)
+- Time: O(n). Trong đó, n là number của nodes trong List
+- Space: O(1). Space bằng 1 do ko cần recursion, dùng in-place
 
 ## General Strat
 

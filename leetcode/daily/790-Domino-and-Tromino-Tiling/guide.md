@@ -12,38 +12,66 @@ Output: 1
 Giải thích: 1 thì chỉ có 1 cách he
 
 **Approach**:
+Dùng DP. Trong khi đó:
 
-1. 
+1. Domino có thể đặt theo chiều ngang (1 x 2) hoặc. dọc (2 x 1)
+2. Tromino có hình chữ L, có thể xoay theo nhiều hướng khác nhau
+3. Cần tìm số để phủ kín hoàn toàn bảng (2 x n)
+
+Định nghĩa 3 trạng thái DP:
+
+- `dp[i][0]`: Số cách phủ kín hoàn toàn bảng 2xi
+- `dp[i][1]`: Số cách phủ bảng 2xi với ô trên cùng ở cột i chưa được phủ
+- `dp[i][2]`: Số cách phủ bảng 2xi với ô dưới cùng ở cột i chưa được phủ
+
+**Base cases**:
+
+- dp[0][0] = 1 (không làm gì với bảng trống)
+- dp[1][0] = 1 (đặt 1 domino dọc)
+- dp[1][1] = dp[1][2] = 0 (không thể có bảng 2x1 với ô trên/dưới chưa phủ)
 
 **Solution**:
 
+Công thức để chuyển trạng thái:
+
+1. Để phủ kín bảng 2xi (dp[i][0]), chúng ta có thể:
+
+   - Phủ kín bảng 2x(i-1) và thêm 1 domino dọc (dp[i-1][0])
+   - Phủ kín bảng 2x(i-2) và thêm 2 domino ngang (dp[i-2][0])
+   - Phủ bảng 2x(i-1) với ô trên chưa phủ và thêm 1 tromino (dp[i-1][1])
+   - Phủ bảng 2x(i-1) với ô dưới chưa phủ và thêm 1 tromino (dp[i-1][2])
+
+   `=> Có 4 cases để phủ kín`
+
+2. Để có bảng 2xi với ô trên chưa phủ (dp[i][1]), chúng ta có thể:
+
+   - Phủ kín bảng 2x(i-2) và thêm 1 tromino đặc biệt (dp[i-2][0])
+   - Phủ bảng 2x(i-1) với ô dưới chưa phủ và thêm 1 domino ngang (dp[i-1][2])
+
+   `=> Có 2 cases chưa phủ ô trên cùng ở cột i`
+
+3. Để có bảng 2xi với ô dưới chưa phủ (dp[i][2]), chúng ta có thể:
+
+   - Phủ kín bảng 2x(i-2) và thêm 1 tromino đặc biệt (dp[i-2][0])
+   - Phủ bảng 2x(i-1) với ô trên chưa phủ và thêm 1 domino ngang (dp[i-1][1])
+
+   `=> Có 2 cases chưa phủ ô dưới cùng ở cột i`
+
+Đệ quy:
+
 ```javascript
-var numEquivDominoPairs = function (dominoes) {
-  const countMap = new Map();
-  let output = 0;
+    dp[i][0] = dp[i-1][0] + dp[i-2][0] + dp[i-1][1] + dp[i-1][2]
+    dp[i][1] = dp[i-2][0] + dp[i-1][2]
+    dp[i][2] = dp[i-2][0] + dp[i-1][1]
+```
 
-  for (let i = 0; i < dominoes.length; i++) {
-    const a = dominoes[i][0];
-    const b = dominoes[i][1];
+Sau đó trả về case đầu tiên là đẹp
 
-    // Tạo khóa chuẩn hóa để [a,b] và [b,a] có cùng khóa
-    const key = a < b ? `${a},${b}` : `${b},${a}`;
-
-    // Đếm số lượng quân domino tương đương đã gặp trước đó
-    let count = countMap.get(key) || 0;
-
-    // Cộng thêm vào kết quả số cặp mới tạo thành
-    output += count;
-
-    // Tăng số lượng quân domino có khóa này
-    countMap.set(key, count + 1);
-  }
-
-  return output;
-};
+```javascript
+    return dp[n][0]
 ```
 
 **Complexity**:
 
-- Thời gian: O(n), với n là số lượng quân domino. Ta chỉ cần duyệt qua mỗi quân domino một lần.
-- Không gian: O(n), trong trường hợp xấu nhất, tất cả các quân domino đều khác nhau và ta cần lưu n khóa trong Map.
+- Thời gian: O(n) - chúng ta chỉ cần duyệt qua n trạng thái
+- Không gian: O(n) - chúng ta lưu trữ mảng DP kích thước n x 3

@@ -10,8 +10,10 @@
  * @return {boolean}
  */
 var isPalindrome = function (head) {
+  // Xử lý trường hợp đặc biệt: danh sách rỗng hoặc chỉ có 1 node
   if (!head || !head.next) return true;
 
+  // Bước 1: Tìm điểm giữa của danh sách
   let slow = head;
   let fast = head;
 
@@ -20,6 +22,7 @@ var isPalindrome = function (head) {
     fast = fast.next.next;
   }
 
+  // Bước 2: Đảo ngược nửa sau của danh sách
   let prev = null;
   let current = slow;
   let next = null;
@@ -31,6 +34,7 @@ var isPalindrome = function (head) {
     current = next;
   }
 
+  // Bước 3: So sánh nửa đầu với nửa sau đã đảo ngược
   let firstHalfPtr = head;
   let secondHalfPtr = prev;
 

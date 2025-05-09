@@ -244,6 +244,7 @@ var reverseList = function (head) {
 Merge hai linked list đã được sắp xếp thành một linked list mới cũng đã được sắp xếp.
 
 **Example**:
+
 - Input: list1 = `1->2->4`, list2 = `1->3->4` → Output: `1->1->2->3->4->4`
 
 **Approach**:
@@ -310,32 +311,32 @@ Final result (after skipping dummy):
  * @param {ListNode} list2
  * @return {ListNode}
  */
-var mergeTwoLists = function(list1, list2) {
-    // Create a dummy head to simplify the merging process
-    const dummyHead = new ListNode(-1);
-    let current = dummyHead;
-    
-    // Traverse both lists and compare values
-    while (list1 !== null && list2 !== null) {
-        if (list1.val <= list2.val) {
-            current.next = list1;
-            list1 = list1.next;
-        } else {
-            current.next = list2;
-            list2 = list2.next;
-        }
-        current = current.next;
-    }
-    
-    // Attach the remaining nodes from either list
-    if (list1 !== null) {
-        current.next = list1;
+var mergeTwoLists = function (list1, list2) {
+  // Create a dummy head to simplify the merging process
+  const dummyHead = new ListNode(-1);
+  let current = dummyHead;
+
+  // Traverse both lists and compare values
+  while (list1 !== null && list2 !== null) {
+    if (list1.val <= list2.val) {
+      current.next = list1;
+      list1 = list1.next;
     } else {
-        current.next = list2;
+      current.next = list2;
+      list2 = list2.next;
     }
-    
-    // Return the merged list (skip the dummy head)
-    return dummyHead.next;
+    current = current.next;
+  }
+
+  // Attach the remaining nodes from either list
+  if (list1 !== null) {
+    current.next = list1;
+  } else {
+    current.next = list2;
+  }
+
+  // Return the merged list (skip the dummy head)
+  return dummyHead.next;
 };
 ```
 
@@ -343,6 +344,125 @@ var mergeTwoLists = function(list1, list2) {
 
 - Time: O(n + m) trong đó n và m lần lượt là độ dài của list1 và list2. Chúng ta chỉ duyệt mỗi node một lần.
 - Space: O(1) vì chúng ta chỉ sử dụng một số lượng cố định các biến phụ, không phụ thuộc vào kích thước đầu vào.
+
+## Palindrome Linked List
+
+**Problem**:
+Palindrome là chuỗi đọc từ trái qua phải, hoặc ngược lại đều giống nhau.
+
+Bài toán có một số thách thức:
+
+Danh sách liên kết chỉ cho phép duyệt một chiều (từ đầu đến cuối)
+Làm sao để so sánh từ cuối về đầu mà không cần duyệt lại từ đầu mỗi lần?
+Làm sao để giải quyết với không gian phụ O(1) (không dùng mảng phụ)?
+
+**Example**:
+Input: head = [1,2,2,1] → Output: `true`
+Input: head = [1,2] → Output: `false`
+
+**Approach**:
+
+Gồm 3 bước chính, vừa tiếp cận vừa visualize:
+
+1. Tìm điểm giữa của danh sách liên kết
+   Áp dụng thủ pháp cơ bản, 2 con trỏ `fast` & `slow`.
+
+```javascript
+let slow = head;
+let fast = head;
+
+while (fast && fast.next) {
+  slow = slow.next; // Di chuyển 1 bước
+  fast = fast.next.next; // Di chuyển 2 bước
+}
+```
+
+2. Đảo ngược nửa sau của danh sách
+   `slow` trỏ đến điểm giữa, đảo ngược điểm giữa ngay tại đây.
+
+```javascript
+let prev = null;
+let current = slow;
+let next = null;
+
+while (current) {
+  next = current.next; // Lưu node kế tiếp
+  current.next = prev; // Đảo chiều con trỏ
+  prev = current; // Di chuyển prev tiến lên
+  current = next; // Di chuyển current tiến lên
+}
+```
+
+3. So sánh nửa đầu với nửa sau đã đảo ngược
+   Giờ ta so sánh từng node của nửa đầu (bắt đầu từ head) với nửa sau đã đảo ngược (bắt đầu từ prev):
+
+```javascript
+let firstHalfPtr = head;
+let secondHalfPtr = prev;
+
+while (secondHalfPtr) {
+  if (firstHalfPtr.val !== secondHalfPtr.val) {
+    return false; // Không phải palindrome
+  }
+  firstHalfPtr = firstHalfPtr.next;
+  secondHalfPtr = secondHalfPtr.next;
+}
+```
+
+**Solution**:
+
+```javascript
+var isPalindrome = function (head) {
+  // Xử lý trường hợp đặc biệt: danh sách rỗng hoặc chỉ có 1 node
+  if (!head || !head.next) return true;
+
+  // Bước 1: Tìm điểm giữa của danh sách
+  let slow = head;
+  let fast = head;
+
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  // Bước 2: Đảo ngược nửa sau của danh sách
+  let prev = null;
+  let current = slow;
+  let next = null;
+
+  while (current) {
+    next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+  }
+
+  // Bước 3: So sánh nửa đầu với nửa sau đã đảo ngược
+  let firstHalfPtr = head;
+  let secondHalfPtr = prev;
+
+  while (secondHalfPtr) {
+    if (firstHalfPtr.val !== secondHalfPtr.val) {
+      return false;
+    }
+
+    firstHalfPtr = firstHalfPtr.next;
+    secondHalfPtr = secondHalfPtr.next;
+  }
+
+  return true;
+};
+```
+
+**Complexity**:
+
+Độ phức tạp thời gian: **O(n)**
+
+- Tìm điểm giữa: O(n/2)
+- Đảo ngược nửa sau: O(n/2)
+- So sánh hai nửa: O(n/2)
+
+Độ phức tạp không gian: **O(1)**
 
 ## General Strat
 

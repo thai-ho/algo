@@ -16,7 +16,6 @@ var maxDepth = function (root) {
     return 0;
   }
 
-  // Recursively find the depth of left and right subtrees
   const leftDepth = maxDepth(root.left);
   const rightDepth = maxDepth(root.right);
 

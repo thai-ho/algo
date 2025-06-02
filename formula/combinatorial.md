@@ -1,3 +1,36 @@
+# TLDR
+
+## 🎯 Tóm tắt
+
+### Công thức tổ hợp
+
+```
+C(n,k) = n! / (k! × (n-k)!)
+```
+
+### Implementation tối ưu
+
+```javascript
+// Thay vì tính giai thừa đầy đủ
+result = (n × (n-1) × ... × (n-k+1)) / (1 × 2 × ... × k)
+```
+
+### Ưu điểm
+
+1. **Tránh overflow** với số lớn
+2. **Performance tốt** hơn O(min(k, n-k))
+3. **Ổn định** về mặt số học
+
+### Ứng dụng trong bài toán
+
+- **Stars and Bars:** Phân phối n vật giống nhau
+- **Inclusion-Exclusion:** Đếm các trường hợp hợp lệ
+- **Optimization:** Base cases và early returns
+
+**Kết luận:** Đây là implementation chuẩn và hiệu quả nhất để tính tổ hợp trong lập trình!
+
+---
+
 # Công thức tính tổ hợp - Combinatorics (Stars and Bars) - C(n,k)
 
 Links:
@@ -117,13 +150,11 @@ Kết quả: C(7,3) = 35
 
 ---
 
-## 🌟 Stars and Bars Theorem
+## PRACTICAL
 
-### Liên quan đến bài toán kẹo
+### Liên quan đến bài chia kẹo
 
-**Vấn đề:** Phân phối n viên kẹo cho 3 đứa trẻ
-
-**Chuyển đổi:** Thành bài toán đặt n ngôi sao và 2 thanh ngăn
+Thay vì dùng thuật ngữ star and bar, thế nó bằng mấy viên kẹo với mấy thằng nhóc. Giống với bài [Chia kẹo cho mấy thằng nhóc](https://github.com/thai-ho/algo/blob/95054ae46035db89800e7380839e9746976c55f2/leetcode/daily/2929-Distribute-Candies-Among-Children-II) của leetcode
 
 ### Visualization
 
@@ -136,7 +167,7 @@ Kết quả: C(7,3) = 35
 |★★★★★|     → Đứa 1: 0, Đứa 2: 5, Đứa 3: 0
 ```
 
-### Công thức Stars and Bars
+### Công thức
 
 **Để phân phối n vật giống nhau cho k người:**
 
@@ -152,8 +183,8 @@ Số cách = C(n + 3 - 1, 3 - 1) = C(n + 2, 2)
 
 ### Giải thích trực quan
 
-1. **n ngôi sao** đại diện cho n viên kẹo
-2. **(k-1) thanh ngăn** chia thành k nhóm
+1. **n** Số viên kẹo
+2. **(k-1)** chia thành k nhóm
 3. **Tổng vị trí:** n + (k-1) = n + k - 1
 4. **Chọn vị trí cho thanh ngăn:** C(n+k-1, k-1)
 
@@ -217,34 +248,3 @@ console.log("Factorial C(7,3) =", factorialCombination(7, 3));
 
 - Chỉ tính: (100 × 99 × 98) / (1 × 2 × 3) = 161,700
 - Không overflow, tính nhanh
-
----
-
-## 🎯 Tóm tắt
-
-### Công thức tổ hợp
-
-```
-C(n,k) = n! / (k! × (n-k)!)
-```
-
-### Implementation tối ưu
-
-```javascript
-// Thay vì tính giai thừa đầy đủ
-result = (n × (n-1) × ... × (n-k+1)) / (1 × 2 × ... × k)
-```
-
-### Ưu điểm
-
-1. **Tránh overflow** với số lớn
-2. **Performance tốt** hơn O(min(k, n-k))
-3. **Ổn định** về mặt số học
-
-### Ứng dụng trong bài toán
-
-- **Stars and Bars:** Phân phối n vật giống nhau
-- **Inclusion-Exclusion:** Đếm các trường hợp hợp lệ
-- **Optimization:** Base cases và early returns
-
-**Kết luận:** Đây là implementation chuẩn và hiệu quả nhất để tính tổ hợp trong lập trình!

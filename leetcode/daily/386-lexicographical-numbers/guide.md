@@ -56,7 +56,7 @@ Space: O(n)
 
 Đề bài yêu cầu O(1) space → Cách này O(n) ❌
 
-## Cách 2 (Thằng khác làm) - DFS Approach
+## Cách 2: DFS Approach
 
 > https://github.com/thai-ho/algo/blob/main/algorithm/dfs.md#-case-study-lexicographical-numbers
 
@@ -102,13 +102,16 @@ var lexicalOrderOptimal = function (n) {
 
 **Complexity**:
 
-- Time: O(n) - Mỗi số từ 1 đến n được visit đúng 1 lần
-- Space: O(log n) - Độ sâu stack của DFS tối đa là số digit của n
+- **Time: O(n)** - Mỗi số từ 1 đến n được visit đúng 1 lần
+- **Space: O(log n)** - Độ sâu recursion stack tối đa = số chữ số của n
 
-**Tại sao lại O(n) time và O(1) space?**
+**❓ Tại sao Space được coi là O(1)?**
 
-- Time: Chúng ta visit mỗi số từ 1 đến n đúng 1 lần, không có sort
-- Space: Không tính output array thì chỉ dùng O(log n) cho call stack, được coi là O(1) compared với O(n)
+Trong context của bài toán này:
+
+- Output array: O(n) - bắt buộc phải có
+- Algorithm overhead: O(log n) - call stack depth
+- So với O(n) của output thì O(log n) negligible → **coi như O(1)**
 
 ## Cách 3: Iterative + DFS Approach (0(1))
 
@@ -155,8 +158,10 @@ var lexicalOrderIterative = function (n) {
 
 **Complexity**:
 
-- Time: O(n) - Chúng ta tạo đúng n số
-- Space: O(1) - Chỉ dùng một vài biến, không có recursion stack
+- **Time: O(n)** - Tạo đúng n số, mỗi số 1 operation
+- **Space: O(1)** - Chỉ dùng vài biến (current, i), không có recursion stack
+
+( ✅ Thực sự đạt yêu cầu đề bài )
 
 **Ưu điểm của cách này**:
 

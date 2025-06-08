@@ -58,7 +58,7 @@ Space: O(n)
 
 ## Cách 2: DFS Approach
 
-> https://github.com/thai-ho/algo/blob/main/algorithm/dfs.md#-case-study-lexicographical-numbers
+> [FYI Định nghĩa DFS](https://github.com/thai-ho/algo/blob/main/algorithm/dfs.md#-case-study-lexicographical-numbers)
 
 **Approach**:
 Sử dụng thuật toán DFS (Depth-First Search) để duyệt các số theo thứ tự từ điển mà không cần sort.

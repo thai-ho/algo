@@ -343,6 +343,10 @@ Final: [1,10,11,12,13,2,3,4,5,6,7,8,9]
 
 ### **Iterative Version (O(1) space):**
 
+Cách dùng này áp dụng iterative chứ ko dùng recursive như solution nguyên thuỷ của DFS
+
+> [FYI giải thích iterative & recursive](https://github.com/thai-ho/algo/blob/eb43bf4f4528cd71d0cd20c2753f47d9b8521f3f/principle/iterative-recursive.md)
+
 ```javascript
 function lexicalOrderIterative(n) {
   const result = [];

@@ -98,7 +98,7 @@ var distributeCandies = function (n, limit) {
     case123 = combination(n - 3 * (limit + 1) + 2, 2);
   }
 
-  // Áp dụng nguyên lý inclusion-exclusion:
+  // Áp dụng nguyên lý inclusion-exclusion: (https://github.com/thai-ho/algo/blob/main/principle/inclusion-exclusion.md)
   // |A ∪ B ∪ C| = |A| + |B| + |C| - |A ∩ B| - |A ∩ C| - |B ∩ C| + |A ∩ B ∩ C|
   let invalidWays = case1 + case2 + case3 - case12 - case13 - case23 + case123;
 

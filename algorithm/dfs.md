@@ -239,7 +239,7 @@ function topologicalSort(graph) {
 }
 ```
 
-## 🔢 Case Study: Lexicographical Numbers
+## Case Study: Lexicographical Numbers
 
 Bài toán thứ tự từ điển là ví dụ điển hình của DFS trên cấu trúc cây ảo.
 

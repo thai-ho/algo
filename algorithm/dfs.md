@@ -1,5 +1,40 @@
 # DFS (Depth-First Search) - Complete Guide
 
+## 📋 Table of Contents
+
+1. [🔍 Định nghĩa](#-định-nghĩa)
+2. [🌳 Cấu trúc cơ bản](#-cấu-trúc-cơ-bản)
+   - [Recursive DFS](#recursive-dfs)
+   - [Iterative DFS](#iterative-dfs)
+3. [🎯 Các trường hợp sử dụng DFS](#-các-trường-hợp-sử-dụng-dfs)
+   - [1. Tree Traversal - Duyệt cây](#1-tree-traversal---duyệt-cây)
+   - [2. Path Finding - Tìm đường đi](#2-path-finding---tìm-đường-đi)
+   - [3. Connected Components - Thành phần liên thông](#3-connected-components---thành-phần-liên-thông)
+   - [4. Cycle Detection - Phát hiện chu trình](#4-cycle-detection---phát-hiện-chu-trình)
+   - [5. Topological Sort - Sắp xếp topo](#5-topological-sort---sắp-xếp-topo)
+4. [🔢 Case Study: Lexicographical Numbers](#-case-study-lexicographical-numbers)
+   - [Tại sao dùng DFS?](#tại-sao-dùng-dfs)
+   - [DFS Approach](#dfs-approach)
+   - [Trace với n=13](#trace-với-n13)
+   - [Iterative Version (O(1) space)](#iterative-version-o1-space)
+5. [🎨 DFS Patterns & Templates](#-dfs-patterns--templates)
+   - [Pattern 1: Simple DFS](#pattern-1-simple-dfs)
+   - [Pattern 2: DFS with Path](#pattern-2-dfs-with-path)
+   - [Pattern 3: DFS with Return Value](#pattern-3-dfs-with-return-value)
+   - [Pattern 4: DFS with State](#pattern-4-dfs-with-state)
+6. [🚀 Advanced DFS Techniques](#-advanced-dfs-techniques)
+   - [1. Memoization DFS](#1-memoization-dfs)
+   - [2. Multi-source DFS](#2-multi-source-dfs)
+   - [3. DFS with Time Stamps](#3-dfs-with-time-stamps)
+7. [💡 Tips & Best Practices](#-tips--best-practices)
+   - [1. Khi nào dùng DFS?](#1-khi-nào-dùng-dfs)
+   - [2. DFS vs BFS](#2-dfs-vs-bfs)
+   - [3. Common Pitfalls](#3-common-pitfalls)
+   - [4. Optimization Tips](#4-optimization-tips)
+8. [🎯 Conclusion](#-conclusion)
+
+---
+
 ## 🔍 Định nghĩa
 
 **DFS (Depth-First Search)** là thuật toán duyệt đồ thị/cây theo chiều sâu:

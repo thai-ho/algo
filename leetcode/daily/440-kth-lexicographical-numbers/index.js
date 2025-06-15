@@ -3,18 +3,22 @@
  * @param {number} k
  * @return {number}
  */
-
-// Brute force
 var findKthNumber = function (n, k) {
+  // Cách 1: Brute force - Generate all numbers rồi sort
   const arr = [];
   for (let i = 1; i <= n; i++) {
     arr.push(i);
   }
-  arr.sort();
+  arr.sort(); // Sort theo string comparison
   return arr[k - 1];
 };
 
-// DFS cơ bản
+// Hoặc cách 2: One-liner siêu ngắn
+var findKthNumber = function (n, k) {
+  return Array.from({ length: n }, (_, i) => i + 1).sort()[k - 1];
+};
+
+// Hoặc cách 3: Dùng DFS đơn giản (reuse code từ bài 386)
 var findKthNumber = function (n, k) {
   const result = [];
 
@@ -37,6 +41,7 @@ var findKthNumber = function (n, k) {
   return result[k - 1];
 };
 
+// Test
 function test() {
   console.log("Test n=13, k=2:", findKthNumber(13, 2)); // Expected: 10
   console.log("Test n=1, k=1:", findKthNumber(1, 1)); // Expected: 1

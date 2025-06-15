@@ -83,3 +83,30 @@ test();
 ```
 
 **Complexity**:
+
+- **Time**: O(log₁₀(n)²)
+
+The outer `while` loop in `findKthNumber` runs at most O(log₁₀(n)) times because:
+
+- We either move to the next sibling (`current++`) or go deeper (`current *= 10`)
+- The maximum depth is the number of digits in n, which is log₁₀(n)
+- We can move sideways at most 9 times per level (digits 1-9)
+
+The `countNumbers` function also runs O(log₁₀(n)) times:
+
+- It iterates through each level of the tree (from 1-digit to d-digit numbers)
+- Each iteration multiplies `current` and `next` by 10
+
+Since `countNumbers` is called in each iteration of the main loop: O(log₁₀(n)) × O(log₁₀(n)) = O(log₁₀(n)²)
+
+- **Space**: O(1)
+
+- Only using a constant amount of extra space for variables
+- No recursion or additional data structures needed
+
+**Why this is efficient**:
+
+- Avoids generating all numbers and sorting them: O(n log n)
+- Avoids generating the first k numbers: O(k)
+- Uses the lexicographical tree structure to skip entire subtrees when possible
+- For large inputs where n = 10⁹, this approach runs in ~30 operations vs 10⁹ operations for brute force

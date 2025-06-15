@@ -20,7 +20,7 @@ var maxDiff = function (num) {
     }
 
     for (let i = 1; i < str.length; i++) {
-      if (str[i] !== "0" && str[i] !== "1") {
+      if (str[i] !== "0" && str[i] !== str[0]) {
         return parseInt(str.replaceAll(str[i], "0"));
       }
     }
@@ -40,6 +40,7 @@ const test = () => {
   console.log("Test num=123:", maxDiff(123));
   console.log("Test num=1111:", maxDiff(1111));
   console.log("Test num=9000:", maxDiff(9000));
+  console.log("Test num=1123:", maxDiff(1123)); // Expected: 9923 - 1023 = 8900
 };
 
 test();

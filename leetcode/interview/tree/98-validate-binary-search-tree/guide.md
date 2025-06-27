@@ -49,7 +49,3 @@ var isValidBST = function (root) {
 - Time: O(n) - visit mỗi node một lần
 - Space: O(h) - h là height của tree (recursion stack)
 
-**Key Points**:
-- BST yêu cầu tất cả nodes trong left subtree < root < tất cả nodes trong right subtree
-- Sử dụng bounds thay vì chỉ so sánh với parent
-- Empty tree (null) là valid BST

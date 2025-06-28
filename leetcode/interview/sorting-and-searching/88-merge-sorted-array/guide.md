@@ -17,11 +17,11 @@ Output: [1,2,2,3,5,6]
 **Solution 1 (Simple but not optimal)**:
 
 ```javascript
-function merge(nums1, m, nums2, n) {
+const merge1 = (nums1, m, nums2, n) => {
   nums1.length = m; // Cắt bỏ n số 0 cuối
   nums1.push(...nums2); // Thêm nums2 vào cuối
   nums1.sort((a, b) => a - b); // Sắp xếp tăng dần
-}
+};
 ```
 
 **Complexity option 1**:
@@ -32,7 +32,7 @@ function merge(nums1, m, nums2, n) {
 **Solution 2 (Optimal - Two pointers)**:
 
 ```javascript
-function merge(nums1, m, nums2, n) {
+const merge2 = (nums1, m, nums2, n) => {
   let i = m - 1; // Pointer cho nums1
   let j = n - 1; // Pointer cho nums2
   let k = m + n - 1; // Pointer cho vị trí cuối nums1
@@ -55,7 +55,7 @@ function merge(nums1, m, nums2, n) {
     j--;
     k--;
   }
-}
+};
 ```
 
 **Complexity option 2**:

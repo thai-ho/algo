@@ -33,3 +33,20 @@ var findLucky = function (arr) {
 // console.log(findLucky([2, 2, 3, 4])); // Expect return 2
 console.log(findLucky([1, 2, 2, 3, 3, 3])); // Expect return 3
 // console.log(findLucky([2, 2, 2, 3, 3])); // Expect return -1
+
+// Cach ngan gon hon
+const findLuckyV2 = function (arr = []) {
+  const map = {};
+  let max = -1;
+
+  for (let val of arr) {
+    if (!map[val]) map[val] = 1;
+    else map[val]++;
+  }
+
+  for (let key of Object.keys(map)) {
+    if (map[key] == key) max = Math.max(max, map[key]);
+  }
+
+  return max;
+};

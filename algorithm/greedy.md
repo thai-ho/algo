@@ -53,6 +53,10 @@ console.log(coinChange(1230));
 // Output: [500, 500, 200, 20, 10] - tổng 5 tờ tiền
 ```
 
+## Ví dụ 2:
+
+[2410 Tìm maximum matching giữa player và trainer](https://github.com/thai-ho/algo/blob/1dc396896975e414c884b2efb71286605cc0e891/leetcode/daily/2410-maximum-matching-of-players-with-trainers/index.js)
+
 ## Pros & Cons
 
 **Ưu điểm:**
@@ -68,4 +72,3 @@ Khó chứng minh tính đúng đắn
 Chỉ áp dụng được cho một số bài toán cụ thể
 
 ## When to use
-

@@ -1,12 +1,10 @@
-## Problem
+**Problem**
 
-**Type:** Linked List Traversal
+Loại: **Linked List - Traversal**
 
-Given head which is a reference node to a singly-linked list. The value of each node in the linked list is either 0 or 1. The linked list holds the binary representation of a number.
+Cho chuỗi listnode singly-linked list, value của mỗi thằng sẽ là `0` và `1`, nguyên list này ráp lại thành 1 số nhị phân - hệ cơ số 2.
 
-Return the decimal value of the number in the linked list.
-
-The most significant bit is at the head of the linked list.
+Output trả về số thập phân từ list các số nhị phân như trên.
 
 **Example**:
 
@@ -28,23 +26,28 @@ The most significant bit is at the head of the linked list.
 ```
 
 **Approach**:
-Assign input voo 
+Tạo biến current (ListNode), binary string
+Current có giá trị thì `binary += current.value`, sau đó moving on qua current.next
+Hết chuỗi linked list thì dùng `parseInt` để parse nhị phân thành thập phân (hệ 2 > hệ 10).
 
 **Solution**:
 
 ```js
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @return {number}
- */
-var getDecimalValue = function (head) {};
+var getDecimalValue = function (head) {
+  let current = head;
+
+  let binary = "";
+
+  while (!!current) {
+    binary = binary.concat(current.val);
+    current = current.next;
+  }
+
+  return parseInt(binary, 2);
+};
 ```
 
 **Complexity**:
+
+- **Time Complexity**: O(n) - duyệt qua tất cả n nodes trong linked list một lần
+- **Space Complexity**: O(n) - tạo binary string có độ dài n để lưu trữ các bit

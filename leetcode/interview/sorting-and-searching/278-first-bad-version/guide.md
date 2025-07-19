@@ -28,31 +28,67 @@ Output: 1
 ```
 
 **Approach**:
+Có rất nhiều cách giải, nhưng cần phải tìm cách nào để tối ưu nhất, Làm sao tìm được phiên bản lỗi đầu tiên mà không phải kiểm tra từng version một?
+
+- Idea #1 là brute force
+
+```
+Đọc mảng từ 1 tới n để kiểm tra bad version đầu tiên -> Cách này bị Time Exceeded
+```
+
+- Idea #2 là dùng binary search kiểm tra theo cặp
+
+```
+Chia đôi range liên tục
+Nếu mid là bad → first bad ở bên trái (hoặc chính là mid)
+Nếu mid là good → first bad ở bên phải
+```
+
+- Idea #3: Exponential Search
+
+```
+Tăng theo cấp số nhân: 1, 2, 4, 8, 16...
+Tìm range chứa first bad, rồi binary search trong range đó
+```
+
+- Idea #4: Ternary Search
+
+```
+Chia làm 3 phần thay vì 2
+Có thể giảm số lần so sánh trong một số trường hợp
+```
 
 **Solution**:
 
 ```js
-/**
- * Definition for isBadVersion()
- *
- * @param {integer} version number
- * @return {boolean} whether the version is bad
- * isBadVersion = function(version) {
- *     ...
- * };
- */
-
-/**
- * @param {function} isBadVersion()
- * @return {function}
- */
+// #1: brute force (Naive) > Time exceeded with large nums
 var solution = function (isBadVersion) {
   /**
    * @param {integer} n Total versions
    * @return {integer} The first bad version
    */
+  return function (n) {};
+};
+
+// #2: Binary search
+var solution = function (isBadVersion) {
   return function (n) {
-    
+    let left = 1;
+    let right = n;
+
+    while (left < right) {
+      let mid = Math.floor((left + right) / 2);
+
+      if (isBadVersion(mid)) {
+        // mid is bad, first bad có thể là mid hoặc ở bên trái
+        right = mid;
+      } else {
+        // mid is good, first bad chắc chắn ở bên phải
+        left = mid + 1;
+      }
+    }
+
+    return left; // left == right = first bad version
   };
 };
 ```

@@ -1,0 +1,1 @@
+Trong thư mục này (`sorting-and-searching`), **binary search** thường là cách approach chính. Hãy nghĩ về cách áp dụng binary search vào bài này - làm sao để "thu hẹp" khoảng tìm kiếm sau mỗi lần gọi API?

@@ -18,7 +18,6 @@ var solution = function (isBadVersion) {
    * @return {integer} The first bad version
    */
   return function (n) {
-
     
   };
 };
